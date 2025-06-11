@@ -12,5 +12,15 @@ Work will be graded taking into account the following aspects:
 
 Please read the respective `README.md` files found in each directory for more details.
 
+# Highly Visibile Bonus Task (Optional)
+Implement a chat system utilizing web sockets on both frontend and backend. This should just be a simple system where multiple users can chat to one another on one single session.
+- For the frontend, create a new page and route to the page `/chat`
+  - Bare minimum design, you dont need to show user names, just a new line for each message
+  - Simple text field and send button
+- No need to implement multiple rooms/sessions
+- Utilize the web socket node package for backend and the client web socket for front end
+- Messages should be displaying live
+- Store the state of the chat on the backend (will be destroyed upon server restart/shut down)
+
 # Submission
 For submission, please upload your solution as a private repository on your GitHub profile and share it with `errgo.project@gmail.com`
