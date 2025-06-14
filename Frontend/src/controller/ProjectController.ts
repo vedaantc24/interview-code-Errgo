@@ -11,12 +11,12 @@ const API_URL = 'http://localhost:3000/projects';
  * 
  * @returns List of {@link IProject}
  */
-export const getProjects = async(): Promise<IProject[]> => {
+export const getProjects = async (): Promise<IProject[]> => {
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
-        console.error("Failed to fetch projects", response);
-        return [];
+      console.error("Failed to fetch projects", response);
+      return [];
 
     }
 
@@ -35,20 +35,29 @@ export const getProjects = async(): Promise<IProject[]> => {
  * @param projectData The project data without the id
  * @returns The newly created project containing the generated id 
  */
-export const createProject = async(projectData: Omit<IProject, 'id'>): Promise<IProject> => {
+export const createProject = async (projectData: Omit<IProject, 'id'>): Promise<IProject> => {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({project: projectData}),
+      // body: JSON.stringify({project: projectData}),
+      body: JSON.stringify(projectData),
+
     });
-    
+
+    // if (!response.ok) {
+    //   throw new Error('Failed to create project');
+    // }
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Failed to create project. Status:', response.status, 'Message:', errorText);
       throw new Error('Failed to create project');
     }
-    
+
+
     let res = await response.json();
     console.log("Successfully created project!", res);
     return res;

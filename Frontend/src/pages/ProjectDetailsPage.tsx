@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { IProject } from "../models/ProjectModels";
+import { getProjects } from "../controller/ProjectController";
 
 const ProjectDetailsPage = () => {
     // TODO: Update this to useState
-    const projects: IProject[] | [] = [];
+    const [projects, setProjects] = useState<IProject[]>([]);
 
     /**
      * Fetch all the projects on load
@@ -13,6 +14,8 @@ const ProjectDetailsPage = () => {
             /**
              * TODO: Complete method to pull project details by calling `getProjects` from ProjectController.ts
              */
+            const data = await getProjects();
+            setProjects(data);
         }
 
         initProjects();
@@ -42,7 +45,7 @@ const ProjectDetailsPage = () => {
                                 
                                 <div className="flex-grow">
                                 <div className="text-xs text-gray-500">Project Name</div>
-                                <div className="font-medium">{/* TODO: Show project name */}</div>
+                                <div className="font-medium">{project.name}</div>
                                 </div>
                                 
                                 {/* Dummy Button */}
@@ -53,7 +56,7 @@ const ProjectDetailsPage = () => {
                             
                             <div className="mb-6">
                                 <div className="text-xs text-gray-500">Description</div>
-                                <div className="text-sm">{/* TODO: Show project description */}</div>
+                                <div className="text-sm">{project.description}</div>
                             </div>
                             
                             {/* Share Button */}
